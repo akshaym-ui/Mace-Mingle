@@ -13,7 +13,11 @@ function App() {
   return (
     <div className="app">
       <nav className="navbar">
-        <h2 className="logo">mingle<span>.</span></h2>
+        <h2 className="logo">
+          <span className="brand-prefix">.mace</span>
+          <span className="brand-name">mingle</span>
+        </h2>
+
         <div className="status">
           <span className="live-dot"></span>
           Ready to connect
@@ -24,9 +28,9 @@ function App() {
         <div className="tag">✦ YOUR NEXT CONVERSATION STARTS HERE</div>
 
         <h1>
-          The world is full
+          Let's talk with the
           <br />
-          of <span>strangers.</span>
+          <span>strangers of MACE.</span>
         </h1>
 
         <p className="subtitle">
@@ -39,16 +43,12 @@ function App() {
           className="start-btn"
           onClick={() => setStarted(true)}
         >
-          Start Mingle <span>→</span>
+          Start chatting <span>→</span>
         </button>
-
-        <p className="note">
-          Anonymous conversations · 18+ only
-        </p>
       </main>
 
       <footer>
-        <span>mingle. © 2026</span>
+        <span>.mace mingle © 2026</span>
         <span>Be kind. Be respectful.</span>
       </footer>
     </div>

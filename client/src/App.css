@@ -8,8 +8,8 @@
 }
 
 body {
-  background: #0b0b10;
-  color: #fff;
+  background: #ffffff;
+  color: #242424;
   font-family: 'DM Sans', sans-serif;
 }
 
@@ -19,8 +19,12 @@ body {
   flex-direction: column;
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 50% 45%, #302052 0%, transparent 48%),
-    #0b0b10;
+    radial-gradient(
+      ellipse at 50% 45%,
+      rgba(255, 139, 66, 0.13) 0%,
+      transparent 48%
+    ),
+    linear-gradient(180deg, #ffffff 0%, #fffaf6 100%);
 }
 
 .navbar {
@@ -31,18 +35,26 @@ body {
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
   font-family: 'Space Grotesk', sans-serif;
   font-size: 30px;
-  letter-spacing: -2px;
+  font-weight: 700;
+  letter-spacing: -1.8px;
 }
 
-.logo span {
-  color: #a78bfa;
+.brand-prefix {
+  color: #f07832;
+}
+
+.brand-name {
+  color: #242424;
 }
 
 .status {
   font-size: 13px;
-  color: #b7b4c5;
+  color: #77716c;
   display: flex;
   align-items: center;
   gap: 9px;
@@ -51,9 +63,9 @@ body {
 .live-dot {
   width: 8px;
   height: 8px;
-  background: #4ade80;
+  background: #22c55e;
   border-radius: 50%;
-  box-shadow: 0 0 12px #4ade80;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.35);
 }
 
 .hero {
@@ -63,29 +75,39 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 40px 20px;
+  padding: 60px 20px;
 }
 
 .tag {
   font-size: 11px;
+  font-weight: 700;
   letter-spacing: 2px;
-  color: #b69afc;
+  color: #e87532;
+  background: #fff1e7;
+  border: 1px solid #ffdfc8;
+  border-radius: 30px;
+  padding: 11px 18px;
   margin-bottom: 30px;
 }
 
 .hero h1 {
+  max-width: 1000px;
   font-family: 'Space Grotesk', sans-serif;
-  font-size: clamp(48px, 8vw, 88px);
-  line-height: 1.08;
-  letter-spacing: -5px;
+  font-size: clamp(42px, 7vw, 82px);
+  line-height: 1.12;
+  letter-spacing: -4px;
+  color: #242424;
 }
 
 .hero h1 span {
-  color: #a78bfa;
+  background: linear-gradient(90deg, #ff9b54, #ed6429);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .subtitle {
-  color: #aaa6b8;
+  color: #77716c;
   line-height: 1.8;
   margin-top: 25px;
   font-size: 16px;
@@ -96,35 +118,30 @@ body {
   padding: 17px 42px;
   border: none;
   border-radius: 50px;
-  background: #a78bfa;
-  color: #100d19;
+  background: linear-gradient(110deg, #ff9b54, #ed6429);
+  color: #ffffff;
+  font-family: 'DM Sans', sans-serif;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  transition: 0.25s;
+  box-shadow: 0 10px 28px rgba(237, 100, 41, 0.22);
+  transition: transform 0.25s, box-shadow 0.25s;
 }
 
 .start-btn:hover {
   transform: translateY(-3px);
-  background: #c4b5fd;
-  box-shadow: 0 10px 35px #a78bfa44;
+  box-shadow: 0 14px 35px rgba(237, 100, 41, 0.32);
 }
 
 .start-btn span {
   margin-left: 12px;
 }
 
-.note {
-  margin-top: 20px;
-  color: #777184;
-  font-size: 12px;
-}
-
 footer {
   padding: 25px 8%;
   display: flex;
   justify-content: space-between;
-  color: #777184;
+  color: #99918b;
   font-size: 12px;
 }
 
@@ -133,11 +150,31 @@ footer {
     padding: 25px 6%;
   }
 
+  .logo {
+    font-size: 25px;
+  }
+
+  .hero {
+    padding: 45px 20px;
+  }
+
   .hero h1 {
-    letter-spacing: -3px;
+    font-size: clamp(38px, 10vw, 58px);
+    letter-spacing: -2.5px;
+  }
+
+  .tag {
+    font-size: 9px;
+    letter-spacing: 1.3px;
+  }
+
+  .subtitle {
+    font-size: 14px;
   }
 
   footer {
     padding: 20px 6%;
+    gap: 15px;
+    font-size: 10px;
   }
 }

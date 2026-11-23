@@ -3,9 +3,22 @@
   font-family: 'DM Sans', sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  background: #ffffff;
+  color: #242424;
 }
 
-html, body, #root {
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
   min-height: 100%;
   margin: 0;
+}
+
+body {
+  min-width: 320px;
+  background: #ffffff;
 }

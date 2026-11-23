@@ -33,7 +33,6 @@ function VideoChat({ onLeave }) {
     let matched = false
     let initiator = false
 
-    // Use Render server online, localhost during local development
     const SERVER_URL =
       import.meta.env.VITE_SERVER_URL ||
       'http://localhost:3000'
@@ -159,7 +158,6 @@ function VideoChat({ onLeave }) {
       }
     }
 
-    // Socket connection
     socket.on('connect', () => {
       setStatus('Finding someone...')
       socket.emit('find-partner')
@@ -176,7 +174,6 @@ function VideoChat({ onLeave }) {
       setStatus('Waiting for a stranger...')
     })
 
-    // Partner matched
     socket.on('matched', data => {
       closePeer()
 
@@ -194,7 +191,6 @@ function VideoChat({ onLeave }) {
       }
     })
 
-    // Receive messages
     socket.on('chat-message', message => {
       if (!matchedRef.current || !message?.text) return
 
@@ -209,7 +205,6 @@ function VideoChat({ onLeave }) {
       ])
     })
 
-    // Receive typing indicator
     socket.on('partner-typing', () => {
       if (matchedRef.current) {
         setPartnerTyping(true)
@@ -220,7 +215,6 @@ function VideoChat({ onLeave }) {
       setPartnerTyping(false)
     })
 
-    // WebRTC signaling
     socket.on('webrtc-offer', offer => {
       handleOffer(offer)
     })
@@ -255,7 +249,6 @@ function VideoChat({ onLeave }) {
       }
     })
 
-    // Partner leaves
     socket.on('partner-left', () => {
       updateMatchState(false)
       initiator = false
@@ -287,7 +280,6 @@ function VideoChat({ onLeave }) {
 
     socket.connect()
 
-    // Start camera
     async function startCamera() {
       try {
         const media = await navigator.mediaDevices.getUserMedia({
@@ -338,21 +330,18 @@ function VideoChat({ onLeave }) {
     }
   }, [])
 
-  // Attach local video
   useEffect(() => {
     if (videoRef.current && stream) {
       videoRef.current.srcObject = stream
     }
   }, [stream])
 
-  // Attach stranger video
   useEffect(() => {
     if (remoteVideoRef.current && remoteStream) {
       remoteVideoRef.current.srcObject = remoteStream
     }
   }, [remoteStream])
 
-  // Scroll to latest message
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({
       behavior: 'smooth',
@@ -413,7 +402,6 @@ function VideoChat({ onLeave }) {
     }, 1200)
   }
 
-  // Send text message
   function sendMessage(event) {
     event.preventDefault()
 
@@ -442,7 +430,6 @@ function VideoChat({ onLeave }) {
     setMessageInput('')
   }
 
-  // Find next stranger
   function findNext() {
     stopTyping()
     matchedRef.current = false
@@ -485,7 +472,10 @@ function VideoChat({ onLeave }) {
     <div className="chat-page">
 
       <nav className="chat-nav">
-        <h2 className="logo">mingle<span>.</span></h2>
+        <h2 className="logo">
+          <span className="brand-prefix">.mace</span>
+          <span className="brand-name">mingle</span>
+        </h2>
 
         <span className="chat-status">
           <span className="live-dot"></span>
@@ -499,7 +489,6 @@ function VideoChat({ onLeave }) {
 
       <main className="chat-layout">
 
-        {/* Video section */}
         <section className="video-section">
 
           <div className="video-container">
@@ -559,7 +548,6 @@ function VideoChat({ onLeave }) {
 
         </section>
 
-        {/* Text chat */}
         <section className="text-chat">
 
           <div className="chat-header">
