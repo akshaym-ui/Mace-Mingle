@@ -1,0 +1,143 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0b0b10;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 45%, #302052 0%, transparent 48%),
+    #0b0b10;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 8%;
+}
+
+.logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 30px;
+  letter-spacing: -2px;
+}
+
+.logo span {
+  color: #a78bfa;
+}
+
+.status {
+  font-size: 13px;
+  color: #b7b4c5;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background: #4ade80;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #4ade80;
+}
+
+.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.tag {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #b69afc;
+  margin-bottom: 30px;
+}
+
+.hero h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(48px, 8vw, 88px);
+  line-height: 1.08;
+  letter-spacing: -5px;
+}
+
+.hero h1 span {
+  color: #a78bfa;
+}
+
+.subtitle {
+  color: #aaa6b8;
+  line-height: 1.8;
+  margin-top: 25px;
+  font-size: 16px;
+}
+
+.start-btn {
+  margin-top: 40px;
+  padding: 17px 42px;
+  border: none;
+  border-radius: 50px;
+  background: #a78bfa;
+  color: #100d19;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.start-btn:hover {
+  transform: translateY(-3px);
+  background: #c4b5fd;
+  box-shadow: 0 10px 35px #a78bfa44;
+}
+
+.start-btn span {
+  margin-left: 12px;
+}
+
+.note {
+  margin-top: 20px;
+  color: #777184;
+  font-size: 12px;
+}
+
+footer {
+  padding: 25px 8%;
+  display: flex;
+  justify-content: space-between;
+  color: #777184;
+  font-size: 12px;
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    padding: 25px 6%;
+  }
+
+  .hero h1 {
+    letter-spacing: -3px;
+  }
+
+  footer {
+    padding: 20px 6%;
+  }
+}
