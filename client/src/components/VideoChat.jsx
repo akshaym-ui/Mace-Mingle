@@ -33,7 +33,12 @@ function VideoChat({ onLeave }) {
     let matched = false
     let initiator = false
 
-    const socket = io('http://localhost:3000', {
+    // Use Render server online, localhost during local development
+    const SERVER_URL =
+      import.meta.env.VITE_SERVER_URL ||
+      'http://localhost:3000'
+
+    const socket = io(SERVER_URL, {
       autoConnect: false
     })
 
