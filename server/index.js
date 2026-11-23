@@ -5,13 +5,24 @@ const { Server } = require('socket.io')
 const cors = require('cors')
 
 const app = express()
-app.use(cors())
+
+// Allowed frontend origins
+const allowedOrigins = [
+  'http://localhost:5173',
+  process.env.CLIENT_URL
+].filter(Boolean)
+
+// Express CORS
+app.use(cors({
+  origin: allowedOrigins
+}))
 
 const server = http.createServer(app)
 
+// Socket.IO setup
 const io = new Server(server, {
   cors: {
-    origin: 'http://localhost:5173',
+    origin: allowedOrigins,
     methods: ['GET', 'POST']
   }
 })
@@ -19,6 +30,7 @@ const io = new Server(server, {
 const waitingQueue = []
 const partners = new Map()
 
+// Remove user from waiting queue
 function removeFromQueue(socketId) {
   const index = waitingQueue.indexOf(socketId)
 
@@ -27,6 +39,7 @@ function removeFromQueue(socketId) {
   }
 }
 
+// Find a random partner
 function findPartner(socket) {
   removeFromQueue(socket.id)
 
@@ -57,6 +70,7 @@ function findPartner(socket) {
   console.log('Matched:', socket.id, partner.id)
 }
 
+// Find next partner
 function nextPartner(socket) {
   removeFromQueue(socket.id)
 
@@ -77,14 +91,17 @@ function nextPartner(socket) {
   findPartner(socket)
 }
 
+// Socket connections
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id)
 
+  // Find partner
   socket.on('find-partner', () => {
     if (partners.has(socket.id)) return
     findPartner(socket)
   })
 
+  // Next partner
   socket.on('next', () => {
     nextPartner(socket)
   })
@@ -137,7 +154,7 @@ io.on('connection', (socket) => {
     }
   })
 
-  // WebRTC signaling
+  // WebRTC signaling: offer
   socket.on('webrtc-offer', (offer) => {
     const partnerId = partners.get(socket.id)
 
@@ -146,6 +163,7 @@ io.on('connection', (socket) => {
     }
   })
 
+  // WebRTC signaling: answer
   socket.on('webrtc-answer', (answer) => {
     const partnerId = partners.get(socket.id)
 
@@ -154,6 +172,7 @@ io.on('connection', (socket) => {
     }
   })
 
+  // WebRTC signaling: ICE candidate
   socket.on('ice-candidate', (candidate) => {
     const partnerId = partners.get(socket.id)
 
@@ -162,6 +181,7 @@ io.on('connection', (socket) => {
     }
   })
 
+  // User disconnects
   socket.on('disconnect', () => {
     removeFromQueue(socket.id)
 
@@ -183,10 +203,14 @@ io.on('connection', (socket) => {
   })
 })
 
+// Server health check
 app.get('/', (req, res) => {
-  res.send('Mingle matchmaking server is running!')
+  res.send('MACE Mingle matchmaking server is running!')
 })
 
-server.listen(3000, () => {
-  console.log('Mingle server running on port 3000')
+// Render-compatible port
+const PORT = process.env.PORT || 3000
+
+server.listen(PORT, () => {
+  console.log(`MACE Mingle server running on port ${PORT}`)
 })
